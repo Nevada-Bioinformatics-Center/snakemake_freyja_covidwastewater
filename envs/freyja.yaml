@@ -1,0 +1,20 @@
+
+channels:
+  - conda-forge
+  - bioconda
+  - anaconda
+dependencies:
+  - bioconda::freyja=1.3.7
+  - bioconda::numpy
+  - bioconda::pandas
+  - bioconda::samtools
+  - anaconda::click
+  - conda-forge::tqdm
+  - conda-forge::cvxpy
+  - conda-forge::pytest
+  - conda-forge::flake8
+  - conda-forge::coveralls
+  - bioconda::ivar
+  - bioconda::usher
+  - conda-forge::matplotlib
+  - conda-forge::joblib
