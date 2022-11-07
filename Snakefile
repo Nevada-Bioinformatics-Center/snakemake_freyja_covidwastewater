@@ -44,6 +44,8 @@ print(SE_DATE)
 today = datetime.date.today().strftime("%Y-%m-%d")
 print("Today's date: %s" % today)
 
+freyja_updatedir="/data/gpfs/assoc/inbre/projects/subhash_verma/covid_wastewater/freyja_db_update"
+
 
 def get_map_reads_input(wildcards):
     #print("Wildcards:", wildcards.sample)
@@ -67,6 +69,7 @@ rule all:
        expand("freyja/demix/{date}_{sample}.output", zip, date=ALL_DATE, sample=ALL_SAMPLES),
        expand("freyja/dates/{date}_{sample}.csv", zip, date=DATE, sample=SAMPLES),
        "freyja/times_metadata.csv",
+       #"%s/update_%s.flag" % (freyja_updatedir, today ),
        "freyja/demix/aggregate_%s_%s.tsv" % (projectname, today),
        "freyja/wastewater_timecourse_%s_%s.pdf" % (projectname, today),
        "freyja/wastewater_timecourse_lineages_%s_%s.pdf" % (projectname, today),
@@ -128,20 +131,20 @@ rule freyja_update:
     input:
         bam=expand("minimap2/{date}/{date}_{sample}_aln.bam", zip, date=ALL_DATE, sample=ALL_SAMPLES),
     output:
-        "freyja/update.flag"
+        "%s/update_%s.flag" % (freyja_updatedir, today ),
     log:
-        "logs/freyja/update.log"
+        "logs/freyja/update_%s.log" % today
     threads: 1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
-        "freyja update --outdir . > {log} 2>&1 && touch {output}"
+        "freyja update > {log} 2>&1 && touch {output}"
 
 rule freyja_variant:
     input:
         bam="minimap2/{date}/{date}_{sample}_aln.bam",
         ref=ref, 
-        #update="freyja/update.flag",
+        #update="%s/update_%s.flag" % (freyja_updatedir, today ),
     output:
         variants="freyja/{date}/{date}_{sample}.variants.tsv",
         depths="freyja/{date}/{date}_{sample}.depths",
@@ -152,7 +155,7 @@ rule freyja_variant:
     threads: 1
     resources: time_min=480, mem_mb=40000, cpus=1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
         "mkdir -p {params} && freyja variants {input.bam} --variants {output.variants} --depths {output.depths} --ref {input.ref} > {log} 2>&1"
 
@@ -168,7 +171,7 @@ rule freyja_demix:
     resources: time_min=480, mem_mb=40000, cpus=1
     threads: 1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
         "freyja demix {input.variants} {input.depths} --output {output.out} > {log} 2>&1"
 
@@ -211,7 +214,7 @@ rule freyja_aggregate_all:
     threads: 1
     resources: time_min=480, mem_mb=40000, cpus=1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
         "freyja aggregate {params.indir} --output {output} --ext output > {log} 2>&1"
 
@@ -225,7 +228,7 @@ rule freyja_plot:
         "logs/freyja/aggregate_plot.log"
     threads: 1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
         "freyja plot {input.aggr} --output {output} --times {input.times} --interval D --windowsize 14 2> {log}"
 
@@ -239,7 +242,7 @@ rule freyja_plot_lineages:
         "logs/freyja/aggregate_plot_lineages.log"
     threads: 1
     conda:
-        "envs/freyja.yaml"
+        "freyja"
     shell:
         #"freyja plot {input.aggr} --output {output} --times {input.times} --interval D --windowsize 14 --colors colors.csv --lineages 2> {log}"
         "freyja plot {input.aggr} --output {output} --times {input.times} --interval D --windowsize 14 --lineages 2> {log}"

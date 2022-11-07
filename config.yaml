@@ -1,4 +1,4 @@
-directory: "/data/gpfs/assoc/inbre/projects/subhash_verma/covid_wastewater/test_input"
+directory: "/data/gpfs/assoc/inbre/projects/subhash_verma/covid_wastewater/TMWRF_input"
 krakendb: "/data/gpfs/assoc/inbre/projects/common_references/kraken2/standard_20210517"
 ref: "/data/gpfs/assoc/inbre/projects/subhash_verma/covid_wastewater/reference/NC_045512_Hu-1.fasta"
 projectname: "TMWRF"
