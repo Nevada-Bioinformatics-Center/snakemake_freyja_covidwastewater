@@ -9,6 +9,7 @@ This snakemake pipeline is designed to automate periodic Sars-CoV-2 wastewater s
 2. Copy the config.template.yaml to config.yaml.
 
 3. Edit the config.yaml for all parameters
+
 `directory` Input Directory with sequencing data organized in a specific manner. Sub-Directories should be named with the date of wastewater sample collection in YYYY-MM-DD format. Within this sub-directory, only 1 sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE illumina sequencing.`
 
 `krakendb` The location for the uncompressed kraken database. These can be obtained here: https://benlangmead.github.io/aws-indexes/k2
