@@ -10,7 +10,7 @@ This snakemake pipeline is designed to automate periodic Sars-CoV-2 wastewater s
 
 3. Edit the config.yaml for all parameters
 
-`directory` Input Directory with sequencing data organized in a specific manner. Sub-Directories should be named with the date of wastewater sample collection in YYYY-MM-DD format. Within this sub-directory, only 1 sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE illumina sequencing.`
+`directory` Input Directory with sequencing data organized in a specific manner. Sub-Directories should be named with the date of wastewater sample collection in YYYY-MM-DD format. Within this sub-directory, only 1 sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE illumina sequencing.
 
 I prefer creating a "raw_seq" folder with the date I downloaded the data. Then symlink the sample data into the appropriate dated folder. The directory tree below may help visualize this structure.
 
