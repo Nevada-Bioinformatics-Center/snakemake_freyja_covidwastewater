@@ -1,5 +1,7 @@
 # snakemake_freyja_covidwastewater
 
+With collaboration with Dr. Subhash Verma and Dr. Krishna Pagilla's labs, we have developed the following pipeline to process covid wastewater samples.
+
 This snakemake pipeline is designed to automate periodic Sars-CoV-2 wastewater sequencing data. It uses PE or SE illumina sequencing data, trims the reads with fastp, maps with minimap2, classifies the reads with Kraken2, then processes the BAM files with Freyja to create an aggregated summary file and figure. 
 
 ### Configuration
@@ -37,6 +39,20 @@ INPUT_DIR
 
 4. Create a "freyja" conda environment
 
+```
+##Create environment name
+conda create -n freyja
+conda activate freyja
+
+##Add the necessary channels
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+
+##Install freyja
+conda install freyja
+```
+
 5. Run `freyja update` to pull the latest covid variant classifications.
 
 
@@ -44,4 +60,17 @@ INPUT_DIR
 
 The pipeline is designed to create a new aggregate and figure every time you run it with a date in the filenames. You may want to run `freyja update` within the freyja conda environment before running the pipeline to update the classifications.
 
+### Run the pipeline
+
+Run the pipeline using snakemake.  Installation instructions here: https://snakemake.readthedocs.io/en/stable/getting_started/installation.html
+
+
+The following commands assume you are running snakemake on a local computer. 
+Be sure to configure the --cores variable with the proper amount on your local system. Snakemake will automatically parallelize the jobs it can run at once.
+
+```
+conda activate snakemake
+snakemake --use-conda -prn --cores 16  ## This command tests and does a dry-run of the pipeline
+snakemake --use-conda -pr --cores 16  ## This command actually runs the pipeline
+```
 
