@@ -71,6 +71,7 @@ snakemake --use-conda -prn --cores 16  ## This command tests and does a dry-run 
 snakemake --use-conda -pr --cores 16   ## This command actually runs the pipeline
 ```
 
-Acknowledgement
+
+### Acknowledgement
 
 This work was supported by funds from the US Treasury through the Coronavirus Aid, Relief, and Economic Security (CARES) Act and grants from the National Institute of General Medical Sciences (GM103440 and GM104944).
