@@ -135,6 +135,7 @@ rule freyja_update:
     log:
         "logs/freyja/update_%s.log" % today
     threads: 1
+    resources: time_min=480, mem_mb=40000, cpus=1
     conda:
         "freyja"
     shell:

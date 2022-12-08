@@ -12,7 +12,7 @@ This pipeline was developed for Drs. Subhash Verma and Krishna Pagilla at the Un
 
 3. Edit config.yaml for all parameters
 
-`directory` Input directory with sequencing data is organized in a specific manner. Sub-directories should be named with the wastewater sample collection date in YYYY-MM-DD format. Within this sub-directory, only one collected sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE Illumina sequencing.
+`directory` Input directory (INPUT_DIR in directory tree below) with sequencing data is organized in a specific manner. Sub-directories should be named with the wastewater sample collection date in YYYY-MM-DD format. Within this sub-directory, only one collected sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE Illumina sequencing.
 
 Example of directory tree:
 ```
@@ -33,7 +33,7 @@ INPUT_DIR
 
 `ref` Location of the Wuhan genome assembly; can be downloaded from Freyja's project page here: https://raw.githubusercontent.com/andersen-lab/Freyja/main/freyja/data/NC_045512_Hu-1.fasta
 
-`projectname` The project name will be added to filenames allowing for multiple sampling sites in an individual report. 
+`projectname` The project name will be added to main output filenames (PDFs, aggregate summary TSV, and HTML QC reports). This allows users to run the pipeline with different input directories and projectname/site locations.
 
 
 4. Create a "freyja" conda environment
@@ -57,7 +57,7 @@ conda install freyja
 
 ### Periodic Updates
 
-The pipeline is designed to create a new aggregated object and figure every time you run it with a date in the filenames. You may want to run `freyja update` within the freyja conda environment before running the pipeline to update the classifications.
+You may want to run `freyja update` within the freyja conda environment before running the pipeline to update the covid lineage classifications. The pipeline is designed to create a new aggregate summary TSV, PDF figures, and QC HTML reports  every run with the current date in the filenames. 
 
 ### Run the pipeline
 
