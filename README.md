@@ -14,7 +14,7 @@ This pipeline was developed for Drs. Subhash Verma and Krishna Pagilla at the Un
 
 `directory` Input directory with sequencing data is organized in a specific manner. Sub-directories should be named with the wastewater sample collection date in YYYY-MM-DD format. Within this sub-directory, only one collected sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE Illumina sequencing.
 
-Examole of directory tree:
+Example of directory tree:
 ```
 INPUT_DIR
 ├── 2022-10-03
@@ -68,7 +68,7 @@ The following commands assume the snakemake pipeline is ran on a local computer,
 ```
 conda activate snakemake
 snakemake --use-conda -prn --cores 16  ## This command tests and does a dry-run of the pipeline
-snakemake --use-conda -pr --cores 16   ## This command actually runs the pipeline
+snakemake --use-conda -pr --cores 16   ## This command runs the pipeline
 ```
 
 
