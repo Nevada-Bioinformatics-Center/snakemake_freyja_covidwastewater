@@ -12,7 +12,7 @@ This pipeline was developed for Drs. Subhash Verma and Krishna Pagilla at the Un
 
 3. Edit config.yaml for all parameters
 
-`directory` Input directory (INPUT_DIR in directory tree below) with sequencing data is organized in a specific manner. Sub-directories should be named with the wastewater sample collection date in YYYY-MM-DD format. Within this sub-directory, only one collected sample may be present with R1 and R2 reads labeled in the filename. If only an R1 filename is found, it will assume SE Illumina sequencing.
+`directory` Read data were organized by site as the main directory (INPUT_DIR in directory tree below) with subdirectory specifying sample dates when the wastewater sample collection date in YYYY-MM-DD format. Within this sub-directory, only one collected sample may be present with R1 and R2 reads labeled in the filename in `*.fastq.gz` format. If only a R1 filename is found, it will assume SE Illumina sequencing.
 
 Example of directory tree:
 ```
@@ -29,7 +29,7 @@ INPUT_DIR
 ```
 
 
-`krakendb` Location for the uncompressed kraken database; can be obtained here: https://benlangmead.github.io/aws-indexes/k2
+`krakendb` Location for the uncompressed kraken "standard" database; can be obtained here: https://benlangmead.github.io/aws-indexes/k2
 
 `ref` Location of the Wuhan genome assembly; can be downloaded from Freyja's project page here: https://raw.githubusercontent.com/andersen-lab/Freyja/main/freyja/data/NC_045512_Hu-1.fasta
 
